@@ -1,3 +1,3 @@
 EAvatar Ava
 =========================
-A versatile agent for building person clouds.
+A versatile agent for building personal clouds.
