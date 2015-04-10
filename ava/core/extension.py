@@ -34,9 +34,9 @@ class ExtensionManager(object):
         for it in pkg_resources.working_set.iter_entry_points(self.namespace, name=None):
             logger.debug("Loading extension: %s at module: %s", it.name, it.module_name)
             logger.debug("")
-            extension = it.load()
+            extension = it.load_from()
             ext = Extension(it.name, it)
-            ext.cls = it.load()
+            ext.cls = it.load_from()
 
             if invoke_on_load:
                 ext.obj = ext.cls()
