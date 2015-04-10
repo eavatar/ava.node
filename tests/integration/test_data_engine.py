@@ -53,9 +53,9 @@ class TestDataEngine(unittest.TestCase):
             cur.put('doc3', b"中文")
 
         with self.engine.cursor("testdb2") as cur:
-            val1 = cur.load_from("doc1")
+            val1 = cur.unpack_from("doc1")
             self.assertEqual("value1", val1)
-            val3 = cur.load_from("doc3")
+            val3 = cur.unpack_from("doc3")
             self.assertEqual(b"中文", val3)
 
         with self.engine.cursor("testdb2", readonly=False) as cur:
