@@ -13,13 +13,14 @@ import lmdb
 from ava.util import time_uuid
 from ava.runtime import environ
 from ava.spi.errors import DataNotFoundError, DataError
+from ava.spi.stores import IStore, ICursor
 
 _DATA_FILE_DIR = b'data'
 
 logger = logging.getLogger(__name__)
 
 
-class Store(object):
+class Store(IStore):
     def __init__(self, name, _db, _engine):
         self.name = name
         self._db = _db
@@ -61,7 +62,7 @@ class Store(object):
         return self._engine.cursor(self.name, readonly=readonly)
 
 
-class Cursor(object):
+class Cursor(ICursor):
     def __init__(self, _txn, _db, _readonly=True):
 
         self._txn = _txn
