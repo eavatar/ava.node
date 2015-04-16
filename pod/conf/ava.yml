@@ -22,7 +22,7 @@ logging:
             class: logging.handlers.RotatingFileHandler
             level: INFO
             formatter: simple
-            filename: {{logs_dir}}/ava.log
+            filename: ${logs_dir}/ava.log
             maxBytes: 1048576 # 1MB
             backupCount: 2
             encoding: utf8

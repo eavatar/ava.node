@@ -10,7 +10,7 @@ import codecs
 import logging
 import logging.config
 import os.path
-from bottle import template
+from string import Template
 
 from yaml import load, dump
 
@@ -43,7 +43,8 @@ def load_conf(conf_file):
     if len(data.strip()) == 0:
         return {}
 
-    data = template(data, **settings)
+    template = Template(data)
+    data = template.substitute(**settings)
     return load(data, Loader=Loader)
 
 
