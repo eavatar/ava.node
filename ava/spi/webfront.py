@@ -16,7 +16,7 @@ from ava.runtime.config import settings
 
 from bottle import route, get, post, delete, put, request, response
 from bottle import static_file as _static_file
-from ava.core.webfront import dispatcher
+from ava.core.web.webfront import dispatcher
 
 logger = logging.getLogger(__name__)
 

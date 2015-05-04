@@ -12,7 +12,6 @@ import multiprocessing
 multiprocessing.freeze_support()
 
 
-
 # prevent no handler warning
 try:
     from logging import NullHandler

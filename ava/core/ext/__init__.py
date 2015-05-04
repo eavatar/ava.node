@@ -24,6 +24,9 @@ class Extension(object):
         self.cls = None
         self.obj = None
 
+    def __repr__(self):
+        return 'Extension(%s)' % self.name
+
 
 class ExtensionManager(object):
     def __init__(self, namespace="ava.extension"):
@@ -34,13 +37,17 @@ class ExtensionManager(object):
         for it in pkg_resources.working_set.iter_entry_points(self.namespace, name=None):
             logger.debug("Loading extension: %s at module: %s", it.name, it.module_name)
             logger.debug("")
-            extension = it.unpack_from()
+            extension = it.load()
             ext = Extension(it.name, it)
-            ext.cls = it.unpack_from()
+            ext.cls = it.load()
 
             if invoke_on_load:
                 ext.obj = ext.cls()
             self.extensions.append(ext)
+
+        # sort extensions by names
+        self.extensions.sort(key=lambda e: e.name)
+        logger.debug("Loaded extensions: %r", self.extensions)
 
     def start_extensions(self, context=None):
         for ext in self.extensions:

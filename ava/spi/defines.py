@@ -22,11 +22,11 @@ AGENT_INFO = {
 
 INSTALLED_ENGINES = [
     "ava.core.data:DataEngine",
-    "ava.core.webfront:WebfrontEngine",
+    "ava.core.web.webfront:WebfrontEngine",
     "ava.core.task:TaskEngine",
-    "ava.core.extension:ExtensionEngine",
-    "ava.core.mod_tasks:TaskModEngine",
-    "ava.core.mod_webhooks:WebhooksEngine",
+    "ava.core.ext:ExtensionEngine",
+    "ava.core.mods.tasks:TaskModEngine",
+    "ava.core.mods.webhooks:WebhooksEngine",
 #    "ava.core.websocket:WebsocketEngine",
 ]
 

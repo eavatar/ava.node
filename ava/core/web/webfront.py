@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import absolute_import, division, unicode_literals
 
 import os
 import logging
@@ -25,7 +25,7 @@ class ApplicationDispatcher(object):
         self.mounts = mounts or {}
 
     def __call__(self, environ, start_response):
-        script = environ.get(b'PATH_INFO', b'')
+        script = environ.get(b'PATH_INFO', '')
         # logger.debug("initial script: %s", script)
         path_info = ''
         while b'/' in script:
@@ -33,7 +33,8 @@ class ApplicationDispatcher(object):
                 app = self.mounts[script]
                 break
             script, last_item = script.rsplit(b'/', 1)
-            path_info = b'/%s%s' % (last_item, path_info)
+            last_item = unicode(last_item, 'utf-8')
+            path_info = '/{0}{1}'.format(last_item, path_info)
         else:
             # logger.debug("Selected script: %s", script)
             app = self.mounts.get(script, self.app)

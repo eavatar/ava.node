@@ -5,11 +5,12 @@ Data engine implementation based on lighting memory database
 The Lmdb is initialized, the access needs to use its binding API, though.
 Extension packages may provide higher-level APIs based on this.
 """
-from __future__ import absolute_import, division, unicode_literals
+from __future__ import (absolute_import, division, unicode_literals)
 
 import os
 import logging
 import lmdb
+
 from ava.util import time_uuid
 from ava.runtime import environ
 from ava.spi.errors import DataNotFoundError, DataError
