@@ -27,14 +27,13 @@ logger = logging.getLogger(__name__)
 __agent = None
 
 
-
 def _mygetfilesystemencoding():
     old = sys.getfilesystemencoding
 
     def inner_func():
         ret = old()
         if ret is None:
-            return 'UTF-8'
+            return 'utf-8'
         else:
             return ret
     return inner_func

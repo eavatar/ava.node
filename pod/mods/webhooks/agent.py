@@ -6,10 +6,9 @@ Commands for controlling the agent process.
 
 import sys
 import gevent
-import bottle
-from ava.spi.webfront import dispatcher, check_authentication
+from ava.spi.webfront import dispatcher, check_authentication, create_app
 
-api = dispatcher.mount(b'agent', bottle.Bottle())
+api = dispatcher.mount(b'agent', create_app())
 api.add_hook('before_request', check_authentication)
 
 

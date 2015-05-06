@@ -5,7 +5,7 @@ import os
 import logging
 
 import gevent
-import bottle
+from . import bottle
 from ws4py.server.geventserver import WSGIServer
 from ava.runtime import settings
 from ava.runtime import environ

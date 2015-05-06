@@ -9,13 +9,15 @@ from ava.runtime import environ
 import logging
 import six
 import binascii
-from bottle import request, hook, HTTPError
+from ava.core.web.bottle import request, hook, HTTPError
 from ava.util import token
 from ava.util import crypto
 from ava.runtime.config import settings
 
-from bottle import route, get, post, delete, put, request, response
-from bottle import static_file as _static_file
+from ..core.web.bottle import route, get, post, delete, put, request, response
+from ..core.web.bottle import static_file as _static_file
+from ..core.web.bottle import Bottle as create_app
+
 from ava.core.web.webfront import dispatcher
 
 logger = logging.getLogger(__name__)

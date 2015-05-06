@@ -90,6 +90,7 @@ def instance(agent=None):
     """
     global _context
     if _context is None:
+        assert agent is not None
         _context = Context(agent)
 
     return _context
