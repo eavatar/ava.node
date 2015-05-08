@@ -81,7 +81,7 @@ class Component(object):
 _context = None
 
 
-def instance(agent=None):
+def get_context(agent=None):
     """
     Gets the context singleton. Must first be invoked by agent.
 

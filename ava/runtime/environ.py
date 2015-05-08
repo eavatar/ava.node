@@ -39,6 +39,8 @@ class Environment(object):
             self.logger.error("Invalid pod folder: %s" % self.pod_dir)
             sys.exit(-1)
 
+        # print("POD folder: %s" % self.pod_dir)
+
         self.conf_dir = os.path.join(self.pod_dir, CONF_DIR_NAME)
         self.pkgs_dir = os.path.join(self.pod_dir, PKGS_DIR_NAME)
         self.data_dir = os.path.join(self.pod_dir, DATA_DIR_NAME)

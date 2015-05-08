@@ -86,7 +86,7 @@ class Agent(object):
         self.running = False
         self.interrupted = False
         self._greenlets = []
-        self._context = context.instance(self)
+        self._context = context.get_context(self)
         self._engines = []
         self.__secret = None
         self.xid = None

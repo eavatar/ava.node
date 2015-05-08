@@ -15,6 +15,7 @@ from ava.util import crypto
 from ava.runtime.config import settings
 
 from ..core.web.bottle import route, get, post, delete, put, request, response
+from ..core.web.bottle import HTTPError
 from ..core.web.bottle import static_file as _static_file
 from ..core.web.bottle import Bottle as create_app
 

@@ -6,7 +6,7 @@ from __future__ import (absolute_import, division,
                         print_function, unicode_literals)
 
 from abc import abstractmethod
-from .context import instance
+from .context import get_context
 
 _dataengine = None
 
@@ -14,7 +14,7 @@ _dataengine = None
 def _get_data_engine():
     global _dataengine
     if _dataengine is None:
-        _dataengine = instance().get('dataengine')
+        _dataengine = get_context().get('dataengine')
     return _dataengine
 
 
@@ -168,7 +168,7 @@ def names():
 
     :return: the store names.
     """
-    return _get_data_engine.store_names()
+    return _get_data_engine().store_names()
 
 
 def create(store_name):
@@ -177,7 +177,7 @@ def create(store_name):
     :param store_name:
     :return:
     """
-    return _get_data_engine.create_store(store_name)
+    return _get_data_engine().create_store(store_name)
 
 
 def remove(store_name):
@@ -186,7 +186,7 @@ def remove(store_name):
     :param store_name:
     :return:
     """
-    return _get_data_engine.remove_store(store_name)
+    return _get_data_engine().remove_store(store_name)
 
 
 def get(store_name):
@@ -195,4 +195,4 @@ def get(store_name):
     :param store_name:
     :return:
     """
-    return _get_data_engine.get_store(store_name)
+    return _get_data_engine().get_store(store_name)

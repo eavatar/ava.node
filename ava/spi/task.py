@@ -4,9 +4,13 @@ Task declaration
 """
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from .context import instance as agent
+from .context import get_context
 
-_engine = agent().task_engine
+_task_engine = None
+
+
+def _get_task_engine():
+    return get_context().get('taskengine')
 
 
 def task(func):
@@ -16,7 +20,7 @@ def task(func):
     :param func:
     :return: the task wrapping given function object.
     """
-    return _engine.register(func)
+    return _get_task_engine().register(func)
 
 
 def run_once(task, seconds=0, args=[], kwargs={}):
@@ -45,7 +49,7 @@ def run_periodic(task, interval, start_time=None, stop_time=None,
 
 
 def cancel_schedule(sched):
-    _engine.cancel(sched)
+    _get_task_engine().cancel(sched)
 
 
 def cancel_schedule_by_id(sched_id):

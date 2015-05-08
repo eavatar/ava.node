@@ -6,14 +6,13 @@ from ava import __version__
 setup(
     name="ava",
     version=__version__,
-    description="EAvatar Ava - A versatile agent.",
+    description="Ava - A versatile archiver for keeping your data.",
     # package_dir={'': ''},
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
 
     install_requires=['backports.ssl-match-hostname',
                       'base58',
-                      'bottle',
                       'click',
                       'gevent',
                       'libnacl',

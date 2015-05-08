@@ -112,6 +112,9 @@ class Cursor(ICursor):
         return self._cursor.key()
 
     def get(self, key):
+        if isinstance(key, unicode):
+            key = key.encode('utf-8')
+
         if not self._cursor.set_key(key):
             return None
 
@@ -169,6 +172,8 @@ class Cursor(ICursor):
         :param key:
         :return:
         """
+        if isinstance(key, unicode):
+            key = key.encode('utf-8')
 
         return self._cursor.set_range(key)
 
@@ -251,6 +256,9 @@ class DataEngine(object):
         return self.stores.keys()
 
     def create_store(self, name):
+        if isinstance(name, unicode):
+            name = name.encode('utf-8')
+
         try:
             _db = self.database.open_db(name, dupsort=False, create=True)
             store = Store(name, _db, self)
@@ -285,6 +293,9 @@ class DataEngine(object):
         return name in self.stores
 
     def cursor(self, store_name, readonly=True):
+        if isinstance(store_name, unicode):
+            store_name = store_name.encode('utf-8')
+
         _write = True
         if readonly:
             _write = False

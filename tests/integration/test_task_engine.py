@@ -12,7 +12,6 @@ from ava.spi.task import task
 counter = 0
 
 
-
 class TaskEngineTests(unittest.TestCase):
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
