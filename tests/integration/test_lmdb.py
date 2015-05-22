@@ -2,6 +2,8 @@
 
 from __future__ import print_function
 
+import os
+import time
 import random
 import unittest
 import lmdb
@@ -13,7 +15,9 @@ class TestLMDB(unittest.TestCase):
 
     def setUp(self):
         self.path = tempfile.mkdtemp()
-        self.lmdb = lmdb.Environment(self.path, max_dbs=16)
+        self.lmdb = lmdb.Environment(self.path,
+                                     map_size=2000000000,
+                                     max_dbs=16)
 
     def tearDown(self):
         self.lmdb.close()
@@ -63,3 +67,15 @@ class TestLMDB(unittest.TestCase):
             for item in cur.iternext_dup(keys=True, values=True):
                 self.assertTrue(prev_value <= item[1])
                 prev_value = item[1]
+
+    @unittest.skip(True)
+    def test_write_large_data(self):
+        data = os.urandom(8192)
+        db = self.lmdb.open_db("test3", create=True, dupsort=False)
+        self.assertIsNotNone(db, "db should not be none.")
+        t0 = time.time()
+        for i in xrange(100):
+            with self.lmdb.begin(db=db, write=True) as txn:
+                txn.put(str(i), data)
+        t1 = time.time()
+        print("Data write takes %f seconds." % (t1 - t0))

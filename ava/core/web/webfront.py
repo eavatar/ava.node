@@ -24,24 +24,24 @@ class ApplicationDispatcher(object):
         self.app = app
         self.mounts = mounts or {}
 
-    def __call__(self, environ, start_response):
-        script = environ.get(b'PATH_INFO', '')
+    def __call__(self, wsgi_env, start_response):
+        script = wsgi_env.get(b'PATH_INFO', b'')
         # logger.debug("initial script: %s", script)
-        path_info = ''
+        path_info = b''
         while b'/' in script:
             if script in self.mounts:
                 app = self.mounts[script]
                 break
             script, last_item = script.rsplit(b'/', 1)
-            last_item = unicode(last_item, 'utf-8')
-            path_info = '/{0}{1}'.format(last_item, path_info)
+            # last_item = unicode(last_item, 'utf-8')
+            path_info = b'/{0}{1}'.format(last_item, path_info)
         else:
             # logger.debug("Selected script: %s", script)
             app = self.mounts.get(script, self.app)
-        original_script_name = environ.get(b'SCRIPT_NAME', b'')
-        environ[b'SCRIPT_NAME'] = original_script_name + script
-        environ[b'PATH_INFO'] = path_info
-        return app(environ, start_response)
+        original_script_name = wsgi_env.get(b'SCRIPT_NAME', b'')
+        wsgi_env[b'SCRIPT_NAME'] = original_script_name + script
+        wsgi_env[b'PATH_INFO'] = path_info
+        return app(wsgi_env, start_response)
 
     def mount(self, path, app):
         logger.debug("Mounting app at %s", path)

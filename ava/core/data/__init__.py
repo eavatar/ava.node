@@ -232,7 +232,9 @@ class DataEngine(object):
         logger.debug("Data path: %s", self.datapath)
 
         try:
-            self.database = lmdb.Environment(self.datapath, max_dbs=1024)
+            self.database = lmdb.Environment(self.datapath,
+                                             map_size=2000000000,
+                                             max_dbs=1024)
             with self.database.begin(write=False) as txn:
                 cur = txn.cursor()
                 for k, v in iter(cur):

@@ -8,6 +8,8 @@ from collections import MutableMapping
 class Model(MutableMapping):
     """ Base class for model objects. A model object has dict-like methods.
     """
+    __slot__ = ['store']
+    
     def __init__(self, *args, **kwargs):
         self.store = dict()
         self.update(dict(*args, **kwargs))
@@ -27,11 +29,8 @@ class Model(MutableMapping):
     def __len__(self):
         return len(self.store)
 
-    def __getattr__(self, attr):
-        return self.store[attr]
-
-    def __setattr__(self, attr, value):
-        self.store[attr] = value
+    def as_dict(self):
+        return self.store
 
 
 class Avatar(Model):
