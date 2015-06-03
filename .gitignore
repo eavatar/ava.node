@@ -54,7 +54,7 @@ target/
 
 # Lmdb
 *.mdb
-
+*.db
 Thumbs.db
 src/*.egg-info
 shippable
